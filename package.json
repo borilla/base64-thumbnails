@@ -1,6 +1,6 @@
 {
   "name": "@borilla/base64-css-thumbnails",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "borilla",
   "description": "Present compressed version of images from inline CSS before loading proper resource",
   "keywords": [

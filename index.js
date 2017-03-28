@@ -4,8 +4,9 @@ var jimp = require('jimp');
 var DEFAULT_OPTIONS = {
 	pattern: '**/*.{jpeg,jpg,png}',
 	cwd: '.',
-	width: 32,
-	height: 32
+	quality: 60,
+	width: 16,
+	height: 16
 };
 
 function main(options) {
@@ -54,7 +55,8 @@ function processFile(file, options) {
 
 function processImage(image, options) {
 	return new Promise(function (resolve, reject) {
-		image.scaleToFit(options.width, options.height),
+		image.scaleToFit(options.width, options.height);
+		image.quality(options.quality);
 		image.getBase64(jimp.MIME_JPEG, function (err, result) {
 			if (err) {
 				reject(err);
