@@ -1,21 +1,16 @@
 var convert = require('../index');
 
 var chai = require('chai');
-var sinon = require('sinon');
 var chaiSubset = require('chai-subset');
-var sinonChai = require('sinon-chai');
-var chaiAsPromised = require('chai-as-promised');
 var expect = chai.expect;
 
 var FIXTURES_DIR = __dirname + '/fixtures/';
 
 chai.use(chaiSubset);
-chai.use(sinonChai);
-chai.use(chaiAsPromised);
 
 describe('convert', function () {
 	// eslint-disable-next-line no-unused-vars
-	var sandbox, options, results, error;
+	var options, results, error;
 
 	before(function () {
 		options = {
@@ -27,7 +22,6 @@ describe('convert', function () {
 	});
 
 	beforeEach(function (done) {
-		sandbox = sinon.sandbox.create();
 		results = error = undefined;
 		convert(options)
 			.then(function (r) {
@@ -40,15 +34,11 @@ describe('convert', function () {
 			});
 	});
 
-	afterEach(function () {
-		sandbox.restore();
-	});
-
 	it('should be a function', function () {
 		expect(convert).to.be.a('function');
 	});
 
-	it('should return an array', function () {
+	it('should return an info array', function () {
 		expect(results.info).to.be.an('array');
 	});
 

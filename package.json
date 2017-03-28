@@ -1,6 +1,6 @@
 {
   "name": "@borilla/base64-css-thumbnails",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "borilla",
   "description": "Present compressed version of images from inline CSS before loading proper resource",
   "keywords": [
@@ -24,11 +24,8 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "chai-as-promised": "^6.0.0",
     "chai-subset": "^1.5.0",
     "eslint": "^2.13.1",
-    "mocha": "^2.5.3",
-    "sinon": "^1.17.7",
-    "sinon-chai": "^2.9.0"
+    "mocha": "^2.5.3"
   }
 }

@@ -9,24 +9,19 @@ var DEFAULT_OPTIONS = {
 };
 
 function main(options) {
-	return processFiles(options).then(function (data) {
+	return processFiles(options).then(function (info) {
 		return Promise.resolve({
-			css: makeCss(data),
-			info: data
+			css: makeCss(info),
+			info: info
 		});
 	});
 }
 
-function makeCss(data) {
+function makeCss(info) {
 	var template = 'img[src*="{file}"] { background-image: url({base64}); background-size: cover; }';
-	var cssArray = data.map(function (fileData) {
-		var file = fileData.file;
-		var base64 = fileData.base64;
-
-		return template.replace('{file}', file).replace('{base64}', base64);
+	var cssArray = info.map(function (fileInfo) {
+		return template.replace('{file}', fileInfo.file).replace('{base64}', fileInfo.base64);
 	});
-
-//	console.log('cssArray', cssArray);
 
 	return cssArray.join('\n');
 }
