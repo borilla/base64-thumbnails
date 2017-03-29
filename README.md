@@ -39,7 +39,7 @@ The module adds the `make-thumbnails-css` command:
 ```
   make-thumbnails-css --root www/media thumbnails.css
 ```
-creates a file `www/media/thumbnails.css` containing something like:
+creates a file `thumbnails.css` containing something like:
 ```
 img[src*="www/media/images/tile-1.jpg"] { background-image: url(data:image/jpeg;base64,...); background-size: cover; }
 img[src*="www/media/images/tile-2.jpg"] { background-image: url(data:image/jpeg;base64,...); background-size: cover; }
