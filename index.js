@@ -2,15 +2,18 @@ var glob = require('glob');
 var jimp = require('jimp');
 
 var DEFAULT_OPTIONS = {
+	cwd: './',
 	pattern: '**/*.{jpeg,jpg,png}',
-	cwd: '.',
+	ignore: [ '**/node_modules/**' ],
 	quality: 60,
 	width: 16,
 	height: 16
 };
 
 function main(options) {
-	return processFiles(options).then(function (info) {
+	var mergedOptions = Object.assign({}, DEFAULT_OPTIONS, options);
+
+	return processFiles(mergedOptions).then(function (info) {
 		return Promise.resolve({
 			css: makeCss(info),
 			info: info
@@ -28,10 +31,9 @@ function makeCss(info) {
 }
 
 function processFiles(options) {
-	var mergedOptions = Object.assign({}, DEFAULT_OPTIONS, options);
-	var files = glob.sync(mergedOptions.pattern, options);
+	var files = glob.sync(options.pattern, options);
 	var promise = Promise.all(files.map(function (file) {
-		return processFile(file, mergedOptions);
+		return processFile(file, options);
 	}));
 
 	return promise;

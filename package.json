@@ -1,6 +1,6 @@
 {
   "name": "@borilla/base64-css-thumbnails",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "author": "borilla",
   "description": "Present compressed version of images from inline CSS before loading proper resource",
   "keywords": [
@@ -11,7 +11,11 @@
   "license": "MIT",
   "repository": "borilla/base64-css-thumbnails",
   "main": "index.js",
+  "bin": {
+    "make-thumbnails-css": "cli.js"
+  },
   "scripts": {
+    "build": "echo 'build'",
     "test": "npm run unit-test && npm run lint",
     "unit-test": "mocha test",
     "lint": "eslint src test",
@@ -19,6 +23,7 @@
     "prepublish": "npm run build"
   },
   "dependencies": {
+    "commander": "^2.9.0",
     "glob": "^7.1.1",
     "jimp": "^0.2.27"
   },
