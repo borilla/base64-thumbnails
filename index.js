@@ -22,7 +22,7 @@ function main(options) {
 }
 
 function makeCss(info) {
-	var template = 'img[src*="{file}"] { background-image: url({base64}); background-size: cover; }';
+	var template = 'img[src*="{file}"] { background-image: url({base64}); background-size: 100% 100%; }';
 	var cssArray = info.map(function (fileInfo) {
 		return template.replace('{file}', fileInfo.file).replace('{base64}', fileInfo.base64);
 	});

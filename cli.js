@@ -27,7 +27,7 @@ options = {
 };
 
 makeCss(options).then(function (result) {
-	var filePath = program.root + program.args[0];
+	var filePath = program.args[0];
 	fs.writeFile(filePath, result.css);
 	console.log('written directives for ' + result.info.length + ' images to ' + filePath);
 	complete = true;
