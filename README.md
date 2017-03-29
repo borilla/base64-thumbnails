@@ -1,5 +1,23 @@
 # base64-css-thumbnails
+
+Output a file containing CSS which adds simplified background images to `<img>` tags prior to loading the larger image resources
+
+## TOC
+
+* [Installation](#installation)
+* [CLI](#cli)
+  * [Example](#example)
+
+## Installation
+
+Install the module using npm. The module isn't published yet but can be installed from the github repo:
+```shell
+$ npm install --save borilla/base64-css-thumbnails
+```
+
 ## CLI
+
+The module adds the `make-thumbnails-css` command:
 ```
   Usage: make-thumbnails-css [options] <output-file>
 
@@ -15,13 +33,15 @@
     -w, --width [pixels]          thumbnail width (16)
     -h, --height [pixels]         thumbnail height (16)
 ```
+
 ### Example
+
 ```
-  make-thumbnails-css --root test/fixtures thumbnails.css
+  make-thumbnails-css --root www/media thumbnails.css
 ```
-will write a file to `test/fixtures thumbnails.css` containing something like:
+creates a file `www/media/thumbnails.css` containing something like:
 ```
-img[src*="test/fixtures/images/acquisition-tile-00-300.jpg"] { background-image: url(data:image/jpeg;base64,...); background-size: cover; }
-img[src*="test/fixtures/images/battleship-wild-targets-tile-15-300.jpg"] { background-image: url(data:image/jpeg;base64,...); background-size: cover; }
-img[src*="test/fixtures/images/secrets-of-the-phoenix-tile-10-300.png"] { background-image: url(data:image/jpeg;base64,...); background-size: cover; }
+img[src*="www/media/images/tile-1.jpg"] { background-image: url(data:image/jpeg;base64,...); background-size: cover; }
+img[src*="www/media/images/tile-2.jpg"] { background-image: url(data:image/jpeg;base64,...); background-size: cover; }
+img[src*="www/media/images/tile-3.png"] { background-image: url(data:image/jpeg;base64,...); background-size: cover; }
 ```
