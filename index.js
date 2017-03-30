@@ -7,7 +7,10 @@ var DEFAULT_OPTIONS = {
 	ignore: [ '**/node_modules/**' ],
 	quality: 60,
 	width: 16,
-	height: 16
+	height: 16,
+	onFilesFound: function () {},
+	onFileProcessing: function () {},
+	onFileProcessed: function () {}
 };
 
 function main(options) {
@@ -32,17 +35,23 @@ function makeCss(info) {
 
 function processFiles(options) {
 	var files = glob.sync(options.pattern, options);
-	var promise = Promise.all(files.map(function (file) {
+
+	options.onFilesFound(files);
+
+	return Promise.all(files.map(function (file) {
 		return processFile(file, options);
 	}));
-
-	return promise;
 }
 
 function processFile(file, options) {
 	var fullPath = options.cwd + file;
-	var promise = jimp.read(fullPath).then(function (image) {
+
+	options.onFileProcessing(file);
+
+	return jimp.read(fullPath).then(function (image) {
 		return processImage(image, options).then(function (base64) {
+			options.onFileProcessed(file);
+
 			return {
 				file: file,
 				// fullPath: fullPath,
@@ -51,8 +60,6 @@ function processFile(file, options) {
 			};
 		});
 	});
-
-	return promise;
 }
 
 function processImage(image, options) {
