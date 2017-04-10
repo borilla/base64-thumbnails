@@ -12,18 +12,19 @@ process.argv[1] = Object.keys(package.bin)[0];
 
 program
 	.version(package.version)
-	.description('Write CSS file containing directives for image thumbnails')
-	.option('-r, --root [path]', 'root directory to search for images and for output (./)', parsePath, './')
+	.description('Output json file containing base64 image thumbnails')
+	.option('-c, --cwd [path]', 'root directory to search for images and for output (./)', parsePath, './')
+	.option('-r, --root [path]', 'alias for "cwd"', parsePath, './')
 	.option('-p, --pattern [glob-pattern]', 'image file pattern to match (**/*.{jpeg,jpg,png})', '**/*.{jpeg,jpg,png}')
 	.option('-q, --quality [0..100]', 'jpeg quality (60)', parseInt, 60)
-	.option('-w, --width [pixels]', 'thumbnail width (16)', parseInt, 16)
-	.option('-h, --height [pixels]', 'thumbnail height (16)', parseInt, 16)
+	.option('-w, --width [pixels]', 'max thumbnail width (16)', parseInt, 16)
+	.option('-h, --height [pixels]', 'max thumbnail height (16)', parseInt, 16)
 	.arguments('<output-file>')
 	.parse(process.argv);
 
 options = {
 	pattern: program.pattern,
-	cwd: program.root,
+	root: program.root,
 	quality: program.quality,
 	width: program.width,
 	height: program.height
@@ -38,7 +39,7 @@ else {
 	makeCss(options).then(function (result) {
 		var filePath = program.args[0];
 		fs.writeFile(filePath, result.css);
-		console.log('written directives for ' + result.info.length + ' images to ' + filePath);
+		console.log('written json for ' + result.info.length + ' images to ' + filePath);
 		exitCode = 0;
 	}).catch(function (error) {
 		console.error(error);
@@ -46,6 +47,7 @@ else {
 	});
 }
 
+// ensure path has a trailing slash
 function parsePath(val) {
 	var lastChar =- val[val.length - 1];
 	if (lastChar !== '/' && lastChar !== '\\') {

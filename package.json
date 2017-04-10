@@ -1,18 +1,18 @@
 {
-  "name": "@borilla/base64-css-thumbnails",
-  "version": "0.1.6",
+  "name": "@borilla/base64-thumbnail",
+  "version": "0.2.0",
   "author": "borilla",
-  "description": "Present compressed version of images from inline CSS before loading proper resource",
+  "description": "Create thumbnail images and return as base64 encoded jpeg",
   "keywords": [
-    "image",
     "base64",
-    "css"
+    "image",
+    "thumbnail"
   ],
   "license": "MIT",
-  "repository": "borilla/base64-css-thumbnails",
+  "repository": "borilla/base64-thumbnail",
   "main": "index.js",
   "bin": {
-    "make-thumbnails-css": "cli.js"
+    "write-thumbnails-json": "cli.js"
   },
   "scripts": {
     "build": "echo 'build'",

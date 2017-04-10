@@ -1,8 +1,8 @@
-var glob = require('glob');
-var jimp = require('jimp');
+var processFile = require('./src/process-file');
+var processFiles = require('./src/process-files');
 
 var DEFAULT_OPTIONS = {
-	cwd: './',
+	root: './',
 	pattern: '**/*.{jpeg,jpg,png}',
 	ignore: [ '**/node_modules/**' ],
 	quality: 60,
@@ -10,71 +10,27 @@ var DEFAULT_OPTIONS = {
 	height: 16,
 	onFilesFound: function () {},
 	onFileProcessing: function () {},
-	onFileProcessed: function () {}
+	onFileProcessed: function () {},
+	onFilesProcessed: function () {}
 };
 
-function main(options) {
+function mergeOptions(options) {
 	var mergedOptions = Object.assign({}, DEFAULT_OPTIONS, options);
 
-	return processFiles(mergedOptions).then(function (info) {
-		return Promise.resolve({
-			css: makeCss(info),
-			info: info
-		});
-	});
+	if (!mergedOptions.cwd) {
+		mergedOptions.cwd = mergedOptions.root;
+	}
+
+	return mergedOptions;
 }
 
-function makeCss(info) {
-	var template = 'img[src*="{file}"] { background-image: url({base64}); background-size: 100% 100%; }';
-	var cssArray = info.map(function (fileInfo) {
-		return template.replace('{file}', fileInfo.file).replace('{base64}', fileInfo.base64);
-	});
+module.exports = {
+	processFile: function (file, options) {
+		processFile(file, mergeOptions(options));
+	},
+	processFiles: function (options) {
+		processFiles(mergeOptions(options), processFile);
+	}
+};
 
-	return cssArray.join('\n');
-}
-
-function processFiles(options) {
-	var files = glob.sync(options.pattern, options);
-
-	options.onFilesFound(files);
-
-	return Promise.all(files.map(function (file) {
-		return processFile(file, options);
-	}));
-}
-
-function processFile(file, options) {
-	var fullPath = options.cwd + file;
-
-	options.onFileProcessing(file);
-
-	return jimp.read(fullPath).then(function (image) {
-		return processImage(image, options).then(function (base64) {
-			options.onFileProcessed(file);
-
-			return {
-				file: file,
-				// fullPath: fullPath,
-				// image: image,
-				base64: base64
-			};
-		});
-	});
-}
-
-function processImage(image, options) {
-	return new Promise(function (resolve, reject) {
-		image.scaleToFit(options.width, options.height);
-		image.quality(options.quality);
-		image.getBase64(jimp.MIME_JPEG, function (err, result) {
-			if (err) {
-				reject(err);
-			}
-			else {
-				resolve(result);
-			}
-		});
-	})
-}
-
-module.exports = main;
+module.exports.default = module.exports.processFiles;
