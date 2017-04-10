@@ -26,10 +26,10 @@ function mergeOptions(options) {
 
 module.exports = {
 	processFile: function (file, options) {
-		processFile(file, mergeOptions(options));
+		return processFile(file, mergeOptions(options));
 	},
 	processFiles: function (options) {
-		processFiles(mergeOptions(options), processFile);
+		return processFiles(mergeOptions(options), processFile);
 	}
 };
 

@@ -2,7 +2,7 @@
 
 var program = require('commander');
 var package = require('./package.json');
-var makeCss = require('./index');
+var processFiles = require('./index').processFiles;
 var fs = require('fs');
 var isComplete = false;
 var options, exitCode;
@@ -36,10 +36,10 @@ if (!process.argv.slice(2).length) {
 	exitCode = 0;
 }
 else {
-	makeCss(options).then(function (result) {
+	processFiles(options).then(function (result) {
 		var filePath = program.args[0];
-		fs.writeFile(filePath, result.css);
-		console.log('written json for ' + result.info.length + ' images to ' + filePath);
+		fs.writeFile(filePath, JSON.stringify(result, null, '\t'));
+		console.log('written json for ' + result.length + ' images to ' + filePath);
 		exitCode = 0;
 	}).catch(function (error) {
 		console.error(error);

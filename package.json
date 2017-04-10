@@ -1,6 +1,6 @@
 {
-  "name": "@borilla/base64-thumbnail",
-  "version": "0.2.0",
+  "name": "@borilla/base64-thumbnails",
+  "version": "0.2.1",
   "author": "borilla",
   "description": "Create thumbnail images and return as base64 encoded jpeg",
   "keywords": [
@@ -9,10 +9,10 @@
     "thumbnail"
   ],
   "license": "MIT",
-  "repository": "borilla/base64-thumbnail",
+  "repository": "borilla/base64-thumbnails",
   "main": "index.js",
   "bin": {
-    "write-thumbnails-json": "cli.js"
+    "base64-thumbnails": "cli.js"
   },
   "scripts": {
     "build": "echo 'build'",
