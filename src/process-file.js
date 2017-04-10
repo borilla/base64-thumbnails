@@ -1,7 +1,6 @@
 var jimp = require('jimp');
 
-// read image from file, create a thumbnail and return image info cntaining
-// base64-endcoded thumbnail
+// read image from file, create a thumbnail and return image info containing base64-endcoded thumbnail
 function processFile(file, options) {
 	var fullPath = options.cwd + file;
 
