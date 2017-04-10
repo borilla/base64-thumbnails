@@ -36,7 +36,7 @@ The module adds the `base64-thumbnails` command:
 ```
 $ base64-thumbnails --root www/media thumbnails.json
 ```
-creates a file `thumbnails.json` containing something like:
+will search for image files within `www/media/` and create a file `thumbnails.json` from found images, eg:
 ```
 [
     {
@@ -74,6 +74,7 @@ creates a file `thumbnails.json` containing something like:
             "height": 15,
             "base64": "data:image/jpeg;base64,..."
         }
-    }
+    },
+    ...
 ]
 ```
