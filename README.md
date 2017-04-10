@@ -2,7 +2,7 @@
 
 Search for images and output a JSON file containing size data and base64 thumbnails
 
-The base64 thumbnails can be used for progressive image loading. See a [jsfiddle](https://jsfiddle.net/borilla/pacf4kva/) for a demo of progressive image loading using a base64 image URI. See [base64-thumbnails-test](https://github.com/borilla/base64-thumbnails-test) for a demo of how this can be achieved using this module
+The base64 thumbnails can be used for progressive image loading. See a [jsfiddle](https://jsfiddle.net/borilla/pacf4kva/) for a demo of progressive image loading using a base64 data URI. See [base64-thumbnails-test](https://github.com/borilla/base64-thumbnails-test) for a demo of how this can be achieved using this module
 
 ## Installation
 
