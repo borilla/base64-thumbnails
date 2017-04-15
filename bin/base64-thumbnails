@@ -3,8 +3,8 @@
 /* eslint-disable no-console */
 
 var program = require('commander');
-var package = require('./package.json');
-var processFiles = require('./index').processFiles;
+var package = require('../package.json');
+var processFiles = require('../src/index').processFiles;
 var fs = require('fs');
 var options, exitCode;
 
