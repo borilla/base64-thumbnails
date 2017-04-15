@@ -1,4 +1,4 @@
-var index = require('../index');
+var index = require('../src/index');
 
 var chai = require('chai');
 var expect = chai.expect;

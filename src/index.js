@@ -1,5 +1,5 @@
-var processFile = require('./src/process-file');
-var processFiles = require('./src/process-files');
+var processFile = require('./process-file');
+var processFiles = require('./process-files');
 
 var DEFAULT_OPTIONS = {
 	root: './',
